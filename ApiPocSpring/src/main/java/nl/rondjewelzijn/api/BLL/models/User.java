@@ -12,7 +12,7 @@ public class User {
     @NotBlank
     private String username;
 
-    public User(@JsonProperty("id") UUID id, @JsonProperty("id") String username) {
+    public User(@JsonProperty("id") UUID id, @JsonProperty("username") String username) {
         this.id = id;
         this.username = username;
     }

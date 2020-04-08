@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v2/user")
+@RequestMapping("api/v1/user")
 @RestController //expose endpoints
 public class UserController {
 

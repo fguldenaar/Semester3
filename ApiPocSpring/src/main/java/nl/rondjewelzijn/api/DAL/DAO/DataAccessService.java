@@ -22,8 +22,13 @@ public class DataAccessService implements IUserDao {
 
     @Override
     public int insertUser(UUID id, User user) {
-        //db.add(new User(id, user.getUsername()));
-        return 0;
+        String sql = "" +
+                "INSERT INTO user_table (" +
+                "id" +
+                "username" +
+                "VALUES (?, ?)";
+
+        return jdbcTemplate.update(sql, user.getId(), user.getUsername());
     }
 
     @Override
@@ -54,35 +59,4 @@ public class DataAccessService implements IUserDao {
     public int updateUserById(UUID id, User updateUser) {
         return 0;
     }
-
-//    @Override
-//    public Optional<User> selectUsersById(UUID id) {
-//        return db.stream()
-//                .filter(user -> user.getId().equals(id))
-//                .findFirst();
-//    }
-//
-//    @Override
-//    public int deleteUserById(UUID id) {
-//        Optional<User> userMaybe = selectUsersById(id);
-//        if(userMaybe.isEmpty()){
-//            return 0;
-//        }
-//        db.remove(userMaybe.get());
-//        return 1;
-//    }
-//
-//    @Override
-//    public int updateUserById(UUID id, User update) {
-//        return selectUsersById(id)
-//                .map(user -> {
-//                    int indexOfUserToUpdate = db.indexOf(user);
-//                    if(indexOfUserToUpdate >= 0){
-//                        db.set(indexOfUserToUpdate, new User(id, update.getUsername()));
-//                        return 1;
-//                    }
-//                    return 0;
-//                })
-//                .orElse(0);
-//    }
 }
