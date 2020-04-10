@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp>{
     setState(() {
       if(auth == true){
         _screen = _settings;
-        _title = 'Welcome';
+        _title = 'Rondje Welzijn';
       }
       else{
         _screen = _login;
