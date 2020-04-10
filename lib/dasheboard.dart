@@ -2,6 +2,8 @@ import 'dart:convert';
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:getflutter/components/avatar/gf_avatar.dart';
+import 'package:getflutter/getflutter.dart';
 //import 'package:rwzapp/dashboard.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,7 +43,7 @@ class _ThisDashboardState extends State<dashboard> {
     List<Client> clienten = [];
 
     for(var cl in jsonData){
-      Client client = Client(cl["index"], cl["naam"]);
+      Client client = Client(cl["index"], cl["naam"], cl["fotoUrl"]);
       clienten.add(client);
     }
     print(clienten.length);
@@ -70,7 +72,10 @@ class _ThisDashboardState extends State<dashboard> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-
+                    leading: GFAvatar(
+                      backgroundImage: NetworkImage(snapshot.data[index].fotoUrl),
+                      shape: GFAvatarShape.standard,
+                    ),
                     title: Text(snapshot.data[index].naam),
                     onTap: (){
 
@@ -108,9 +113,9 @@ class DetailPage extends StatelessWidget{
 class Client{
  final int index;
  final String naam;
- //final String fotoUrl;
+ final String fotoUrl;
 
- Client(this.index, this.naam);
+ Client(this.index, this.naam, this.fotoUrl);
 }
 
 
