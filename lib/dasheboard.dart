@@ -31,29 +31,29 @@ class dashboard extends StatefulWidget{
 class _ThisDashboardState extends State<dashboard> {
 
 
-  Future<List<Client>> _getClienten() async {
+  Future<List<User>> _getUsers() async {
     var data = await http.get("http://localhost:8080/api/v1/user");
     var jsonData = json.decode(data.body);
 
-    List<Client> clienten = [];
+    List<User> users = [];
 
     for(var cl in jsonData){
-      Client client = Client(cl["index"], cl["username"]);
-      clienten.add(client);
+      User user = User(cl["index"], cl["username"]);
+      users.add(user);
     }
-    print(clienten.length);
-    return clienten;
+    print(users.length);
+    return users;
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Clienten'),
+        title: new Text('Users'),
       ),
       body: Container(
         child: FutureBuilder(
-          future: _getClienten(),
+          future: _getUsers(),
           builder: (BuildContext context, AsyncSnapshot snapshot){
             print(snapshot.data);
             if(snapshot.data == null){
@@ -88,7 +88,7 @@ class _ThisDashboardState extends State<dashboard> {
 }
 
 class DetailPage extends StatelessWidget{
-  final Client client;
+  final User client;
 
   DetailPage(this.client);
 
@@ -102,11 +102,11 @@ class DetailPage extends StatelessWidget{
   }
 }
 
-class Client{
+class User{
  final int index;
  final String username;
 
- Client(this.index, this.username);
+ User(this.index, this.username);
 }
 
 
