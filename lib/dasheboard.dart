@@ -1,10 +1,5 @@
 import 'dart:convert';
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:getflutter/components/avatar/gf_avatar.dart';
-import 'package:getflutter/getflutter.dart';
-//import 'package:rwzapp/dashboard.dart';
 import 'package:http/http.dart' as http;
 
 class ThisDashboard extends StatelessWidget {
@@ -37,13 +32,13 @@ class _ThisDashboardState extends State<dashboard> {
 
 
   Future<List<Client>> _getClienten() async {
-    var data = await http.get("https://rondjewelzijnapi.azurewebsites.net/api/Clienten");
+    var data = await http.get("http://localhost:8080/api/v1/user");
     var jsonData = json.decode(data.body);
 
     List<Client> clienten = [];
 
     for(var cl in jsonData){
-      Client client = Client(cl["index"], cl["naam"], cl["fotoUrl"]);
+      Client client = Client(cl["index"], cl["username"]);
       clienten.add(client);
     }
     print(clienten.length);
@@ -64,7 +59,7 @@ class _ThisDashboardState extends State<dashboard> {
             if(snapshot.data == null){
               return Container(
                   child: Center(
-                      child: Text("Momentje...")
+                      child: Text("Loading...")
                   )
               );
             } else {
@@ -72,11 +67,8 @@ class _ThisDashboardState extends State<dashboard> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: GFAvatar(
-                      backgroundImage: NetworkImage(snapshot.data[index].fotoUrl),
-                      shape: GFAvatarShape.standard,
-                    ),
-                    title: Text(snapshot.data[index].naam),
+
+                    title: Text(snapshot.data[index].username),
                     onTap: (){
 
                       Navigator.push(context,
@@ -104,7 +96,7 @@ class DetailPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(client.naam),
+        title: Text(client.username),
       ),
     );
   }
@@ -112,10 +104,9 @@ class DetailPage extends StatelessWidget{
 
 class Client{
  final int index;
- final String naam;
- final String fotoUrl;
+ final String username;
 
- Client(this.index, this.naam, this.fotoUrl);
+ Client(this.index, this.username);
 }
 
 
