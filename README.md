@@ -1,6 +1,7 @@
-# WemosWifi
 
-## Omschrijving
+![Icon](https://github.com/RondjeWelzijn/SensorStuff/blob/master/5042pc183Til/picca.png)
+
+# Omschrijving
 De code in deze repository is ontwikkeld voor mijn proof of concept. Als WiFi is verbonden blijft de gele LED branden zodra er geen WiFi is zal deze niet meer branden zo weet men of de Wemos een internet connectie heeft. Bij het detecteren van beweging brand het de groene LED en stuurt het een "WakeyWakey" bericht naar de API van Rondje Welzijn. Iedere minuut wordt er een "Alive" signaal verstuurd naar de API zodat er gezien kan worden dat het aparaat actief is.
 
 Met behulp van de onderstaande link kan er gecontroleerd worden welk device een "WakeyWakey" signaal stuurt en welk device een "Alive" melding stuurt.
@@ -49,4 +50,7 @@ Voor het aansluiten van de Wemos kan men de onderstaande tekening overnemen voor
 
 
 ![Icon](https://github.com/RondjeWelzijn/SensorStuff/blob/master/5042pc183Til/WemosDraw_bb21.png)
+
+
+
 
